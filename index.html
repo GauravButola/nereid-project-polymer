@@ -5,31 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script 
+    <script
       src="/bower_components/webcomponentsjs/webcomponents.js">
     </script>
-    <link rel="import" 
-      href="/bower_components/core-toolbar/core-toolbar.html">
-    <link rel="import" 
-      href="/bower_components/core-image/core-image.html">
-    <link rel="import" 
-      href="/bower_components/core-pages/core-pages.html">
-    <link rel="import" 
-      href="/bower_components/paper-button/paper-button.html">
-    <link rel="import" 
-      href="/bower_components/paper-shadow/paper-shadow.html">
-    <link rel="import" 
-      href="/bower_components/paper-tabs/paper-tabs.html">
-    <link rel="import" 
-      href="/bower_components/paper-input/paper-input.html">
-    <link rel="import" 
-      href="/bower_components/core-scaffold/core-scaffold.html">
-    <link rel="import" 
-      href="/bower_components/core-header-panel/core-header-panel.html">
-    <link rel="import" 
-      href="/bower_components/core-icons/core-icons.html">
-    <link rel="import" 
-      href="/bower_components/paper-icon-button/paper-icon-button.html">    
+    <link rel="import" href="/bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="/bower_components/core-image/core-image.html">
+    <link rel="import" href="/bower_components/core-pages/core-pages.html">
+    <link rel="import" href="/bower_components/paper-button/paper-button.html">
+    <link rel="import" href="/bower_components/paper-shadow/paper-shadow.html">
+    <link rel="import" href="/bower_components/paper-tabs/paper-tabs.html">
+    <link rel="import" href="/bower_components/paper-input/paper-input.html">
+    <link rel="import" href="/bower_components/core-scaffold/core-scaffold.html">
+    <link rel="import" href="/bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="/bower_components/core-icons/core-icons.html">
+    <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
 
     <!-- local components -->
     <link rel="import" href="/components/project-list.html">
@@ -43,7 +32,7 @@
 
       See: http://www.google.com/design/spec/style/color.html#color-ui-color-application
 
-      Primary - Blue 
+      Primary - Blue
 
        * 500: #2196F3
        * 100: #BBDEFB
@@ -60,17 +49,17 @@
         height: 100%;
         margin: 0;
       }
-    
+
       body {
         font-family: 'Helvetica Neue',Helvetica,Arial,'sans-serif';
       }
-      
+
       .content {
         background-color: #fff;
         height: 5000px;
         padding: 20px;
       }
-      
+
       paper-tabs.orange paper-tab::shadow #ink {
         color: #FFAB91;
       }
@@ -78,11 +67,14 @@
         background-color: #FFAB91;
       }
 
-      
+
     </style>
 
   </head>
   <body fullbleed layout vertical>
-    <app-bar></app-bar>
+    <core-drawer-panel id="drawer-panel">
+      <project-list drawer></project-list>
+      <app-bar main></app-bar>
+    </core-drawer-panel>
   </body>
 </html>

@@ -69,7 +69,7 @@
         webkit-appearance: none;
         webkit-box-flex: 1;
         webkit-flex: 1 0 0;
-      }      
+      }
     </style>
     <core-toolbar class="blue">
       <div id="search" show?="{{showingSearch}}" class="middle">
@@ -79,7 +79,7 @@
         </template>
       </div>
       <template if="{{ !showingSearch }}">
-        <paper-icon-button icon="menu" on-tap="{{menuAction}}"></paper-icon-button>
+        <paper-icon-button icon="menu" on-tap="{{onMenuClick}}"></paper-icon-button>
         <div flex>Nereid Project</div>
         <paper-icon-button icon="search" on-click="{{toggleSearch}}"></paper-icon-button>
         <paper-icon-button icon="more-vert"></paper-icon-button>
@@ -108,17 +108,21 @@
       onKeyPress: function(e, detail, sender) {
         if (e.keyCode == 13) { // Enter
           if (sender.value) {
-            recordSearch(sender.value);
+            <!--recordSearch(sender.value);-->
             var q = 'site:polymer-project.org+' + sender.value;
             window.open('https://www.google.com/search?q=' + q);
           }
         }
-        if (e.keyCode == 27) { // Esc 
+        if (e.keyCode == 27) { // Esc
           this.showingSearch = false;
-        }        
+        }
       },
       onMenuClick: function () {
-        this.fire('hamburger-time');
+        this.drawerPanel.togglePanel();
+      },
+      domReady: function() {
+        this.drawerPanel = document.getElementById('drawer-panel');
+        this.drawerPanel.forceNarrow = true;
       }
     });
   </script>
