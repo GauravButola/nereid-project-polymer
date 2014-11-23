@@ -1,0 +1,26 @@
+<link rel="import" 
+  href="../bower_components/core-menu/core-menu.html">
+<link rel="import" 
+  href="../bower_components/core-item/core-item.html">
+
+<polymer-element name="project-list">
+  <template>
+    <style>
+    </style>
+    <core-menu theme="core-light-theme">
+      <template repeat="{{project in projects}}">
+        <core-item icon="work" label="{{ project.name }}"></core-item>
+      </template>
+    </core-menu>  
+  </template>
+  <script>
+    Polymer({
+      created: function() {
+        this.projects = [
+          {name: 'Advocatetax', fields: [1, 2, 3]},
+          {name: 'Lie-Nielsen', fields: [7, 0, 10]}
+        ];
+      }
+    });    
+  </script>
+</polymer-element>

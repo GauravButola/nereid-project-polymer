@@ -1,0 +1,125 @@
+<!--
+    @license BSD
+    Copyright (c) 2014 Openlabs Technologies & Consulting (P) Limited.
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<polymer-element name="app-bar">
+  <template>
+    <style>
+      core-toolbar.blue {
+        background-color: #2196F3;
+        color: #FFF;
+      }
+      #search
+      {
+        align-items: center;
+        background-color: inherit;
+        box-sizing: border-box;
+        display: flex;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: -o-flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        flex: 0 0 auto;
+        moz-align-items: center;
+        moz-box-sizing: border-box;
+        moz-flex: 0 0 auto;
+        ms-align-items: center;
+        ms-flex: 0 0 auto;
+        o-align-items: center;
+        o-flex: 0 0 auto;
+        webkit-align-items: center;
+        webkit-box-align: center;
+        webkit-box-flex: 1;
+        webkit-box-sizing: border-box;
+        webkit-flex: 0 0 auto;
+        width: 40px;
+      }
+      #search[show]
+      {
+        height: 100%;
+        left: 0;
+        margin-left: 0;
+        padding: 0 16px;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+      #search[show] input
+      {
+        padding: 10px;
+        visibility: visible;
+      }
+      input
+      {
+        background-color: inherit;
+        border: none;
+        color: inherit;
+        flex: 1 0 0;
+        font-size: 20px;
+        moz-flex: 1 0 0;
+        ms-flex: 1 0 0;
+        o-flex: 1 0 0;
+        outline: none;
+        padding: 0;
+        visibility: hidden;
+        webkit-appearance: none;
+        webkit-box-flex: 1;
+        webkit-flex: 1 0 0;
+      }      
+    </style>
+    <core-toolbar class="blue">
+      <div id="search" show?="{{showingSearch}}" class="middle">
+        <template if="{{ showingSearch }}">
+          <paper-icon-button icon="search" on-click="{{toggleSearch}}"></paper-icon-button>
+          <input type="search" id="input" on-keyup="{{onKeyPress}}" autocomplete="off">
+        </template>
+      </div>
+      <template if="{{ !showingSearch }}">
+        <paper-icon-button icon="menu" on-tap="{{menuAction}}"></paper-icon-button>
+        <div flex>Nereid Project</div>
+        <paper-icon-button icon="search" on-click="{{toggleSearch}}"></paper-icon-button>
+        <paper-icon-button icon="more-vert"></paper-icon-button>
+      </template>
+    </core-toolbar>
+  </template>
+  <script>
+    Polymer('app-bar', {
+      theme: 'dark',
+      home: false,
+      showingSearch: false,
+      badge: '',
+      toggleSearch: function(e, detail, sender) {
+        if (e) { // comes first
+          e.stopPropagation();
+        }
+        if (e.target === this.$.search.querySelector('#input')) {
+          return;
+        }
+        this.showingSearch = !this.showingSearch;
+        this.classList.toggle('search-on');
+        this.async(function() {
+          this.$.search.querySelector('#input').focus();
+        });
+      },
+      onKeyPress: function(e, detail, sender) {
+        if (e.keyCode == 13) { // Enter
+          if (sender.value) {
+            recordSearch(sender.value);
+            var q = 'site:polymer-project.org+' + sender.value;
+            window.open('https://www.google.com/search?q=' + q);
+          }
+        }
+        if (e.keyCode == 27) { // Esc 
+          this.showingSearch = false;
+        }        
+      },
+      onMenuClick: function () {
+        this.fire('hamburger-time');
+      }
+    });
+  </script>
+</polymer-element>
